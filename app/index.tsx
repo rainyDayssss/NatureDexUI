@@ -1,39 +1,39 @@
-import { CameraType, CameraView, useCameraPermissions } from 'expo-camera';
-import React, { useState } from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { CameraView, useCameraPermissions } from 'expo-camera';
+import { useRef, useState } from 'react';
+import { Button, Image, StyleSheet, Text, View } from 'react-native';
 
 
 export default function Index() {
-  const [facing, setFacing] = useState<CameraType>('back');
   const [permission, requestPermission] = useCameraPermissions();
+  const cameraRef = useRef<CameraView>(null);
+  const [photoUri, setPhotoUri] = useState<string | null>(null);
 
-  if (!permission) {
-    // Camera permissions are still loading.
-    return <View />;
-  }
+  if (!permission) return <View />;
 
   if (!permission.granted) {
-    // Camera permissions are not granted yet.
     return (
       <View style={styles.container}>
-        <Text style={styles.message}>We need your permission to show the camera</Text>
-        <Button onPress={requestPermission} title="grant permission" />
+        <Text>Camera permission required</Text>
+        <Button title="Grant Permission" onPress={requestPermission} />
       </View>
     );
   }
 
-  function toggleCameraFacing() {
-    setFacing(current => (current === 'back' ? 'front' : 'back'));
-  }
+  const takePhoto = async () => {
+    if (cameraRef.current) {
+      const photo = await cameraRef.current.takePictureAsync();
+      setPhotoUri(photo.uri);
+    }
+  };
 
   return (
     <View style={styles.container}>
-      <CameraView style={styles.camera} facing={facing} />
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
-          <Text style={styles.text}>Flip Camera</Text>
-        </TouchableOpacity>
-      </View>
+      <CameraView ref={cameraRef} style={styles.camera} facing="back" />
+      <Button title="Take Photo" onPress={takePhoto} />
+
+      {photoUri && (
+        <Image source={{ uri: photoUri }} style={styles.preview} />
+      )}
     </View>
   );
 }
@@ -42,29 +42,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-  },
-  message: {
-    textAlign: 'center',
-    paddingBottom: 10,
-  },
-  camera: {
-    flex: 1,
-  },
-  buttonContainer: {
-    position: 'absolute',
-    bottom: 64,
-    flexDirection: 'row',
-    backgroundColor: 'transparent',
-    width: '100%',
-    paddingHorizontal: 64,
-  },
-  button: {
-    flex: 1,
     alignItems: 'center',
   },
-  text: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'white',
+  camera: {
+    width: 300,
+    height: 400,
+  },
+  preview: {
+    width: 300,
+    height: 400,
+    marginTop: 10,
   },
 });
+
