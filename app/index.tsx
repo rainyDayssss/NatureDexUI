@@ -59,7 +59,7 @@ export default function Index() {
       setResult(null);
 
       const photo = await cameraRef.current.takePictureAsync({
-        quality: 0.8,
+        quality: 1,
       });
 
       if (!photo.uri) throw new Error('No photo URI');

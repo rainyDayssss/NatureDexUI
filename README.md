@@ -1,50 +1,99 @@
-# Welcome to your Expo app 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# 🌿 NatureDexUI
 
-## Get started
+![Expo](https://img.shields.io/badge/Expo-49-blue)
+![React%20Native](https://img.shields.io/badge/React%20Native-0.73-green)
+![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
-1. Install dependencies
+NatureDexUI is the **mobile frontend** for **NatureDex**, a real-world species identification system inspired by the Pokédex.  
+Capture a photo of a plant and instantly receive its **scientific name, common name, and description** using **NatureDexAPI**.
 
-   ```bash
-   npm install
-   ```
+---
 
-2. Start the app
+## Features
 
-   ```bash
-   npx expo start
-   ```
+- 📸 Capture plant photos using the device camera  
+- 🌱 Identify species via **NatureDexAPI**  
+- 📖 View scientific name, common name, and description  
+- 🎨 Pokédex-inspired UI with smooth animations  
+- 📱 Optimized for Android (iOS-ready)
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Tech Stack
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- **Expo**
+- **React Native**
+- **TypeScript**
+- **expo-camera**
+- **expo-file-system**
+- **NatureDexAPI (FastAPI backend)**
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## Getting Started
+
+### 1. Install dependencies
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 2. Configure environment variables
 
-## Learn more
+Create a `.env` file in the project root:
+```
+EXPO_PUBLIC_API_BASE_URL=http://YOUR_BACKEND_IP:8000` 
+```
+Example (local backend):
+```
+EXPO_PUBLIC_API_BASE_URL=http://[IP address]:8000` 
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+ >⚠️ `localhost` will not work on physical devices.  
+ >Always use your machine’s local IP address.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### 3. Start the app
 
-## Join the community
+`npx expo start` 
 
-Join our community of developers creating universal apps.
+Open the app using:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+-   📱 **Expo Go** (recommended)
+    
+-   🤖 Android Emulator
+    
+-   🍎 iOS Simulator (macOS only)
+---
+## Usage
+
+1.  Launch the app
+    
+2.  Grant camera permission
+    
+3.  Take a photo of a plant
+    
+4.  Wait for identification
+    
+5.  View species details in the result panel
+---
+## Backend Integration
+
+NatureDexUI depends on **NatureDexAPI** for plant identification and data enrichment.
+
+**NatureDexAPI features:**
+
+-   Hugging Face plant classification
+    
+-   Species enrichment via **iNaturalist** and **Wikipedia**
+    
+-   Confidence thresholding for reliable predictions
+    
+
+🔗 Backend repository:  
+👉 [https://github.com/rainyDayssss/NatureDexAPI](https://github.com/rainyDayssss/NatureDexAPI)
+
+---
+## License
+
+MIT © 2026 Jhon Rosell B. Talisic
